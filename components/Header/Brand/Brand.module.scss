@@ -1,0 +1,7 @@
+@use '../../../styles/variables.scss' as var;
+
+.brand {
+  font-size: var.$fs-600;
+  text-shadow: var.$shadow-dark;
+  cursor: pointer;
+}

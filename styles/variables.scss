@@ -1,0 +1,18 @@
+// Colors
+$clr-blue: rgb(5, 142, 217);
+$clr-light-blue: rgb(234, 246, 255);
+$clr-green: rgb(4, 231, 98);
+$clr-dark: rgb(42, 61, 69);
+
+// Font Sizes
+$fs-900: 9.375rem;
+$fs-800: 6.25rem;
+$fs-700: 3.5rem;
+$fs-600: 2rem; //H1
+$fs-500: 1.75rem;
+$fs-400: 1.125rem;
+$fs-300: 1rem;
+$fs-200: 0.875rem;
+
+// Shadows
+$shadow-dark: 2px 5px 10px lighten($clr-dark, 10%);
