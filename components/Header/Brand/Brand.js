@@ -5,7 +5,7 @@ import classes from './Brand.module.scss';
 const Brand = () => {
   return (
     <Link href='/' passHref>
-      <h1 className={classes.brand}>TV Tracker App</h1>
+      <a className={classes.brand}>TV Tracker App</a>
     </Link>
   );
 };

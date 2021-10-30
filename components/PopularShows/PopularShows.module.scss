@@ -1,0 +1,20 @@
+@use '../../styles/variables.scss' as var;
+
+.popular-shows {
+  margin-block: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.show-img {
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: var.$shadow-dark;
+  @include var.primaryTransition(all);
+
+  &:hover {
+    opacity: 0.7;
+    transform: translateY(-5px);
+  }
+}
