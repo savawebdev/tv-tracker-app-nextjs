@@ -16,3 +16,8 @@ $fs-200: 0.875rem;
 
 // Shadows
 $shadow-dark: 2px 5px 10px lighten($clr-dark, 10%);
+
+// Transitions
+@mixin primaryTransition($property) {
+  transition: $property 0.25s ease-in;
+}
