@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import { signIn } from 'next-auth/client';
+import { useRouter } from 'next/router';
 // import { registerUser } from '../../lib/auth';
 import classes from './RegisterForm.module.scss';
 import Label from '../UI/Form/Label';
@@ -15,10 +17,10 @@ const registerUser = async (email, password) => {
   });
 
   const data = await result.json();
-  console.log(data);
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -36,6 +38,14 @@ const RegisterForm = () => {
     }
 
     await registerUser(email, password);
+
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
+
+    router.push('/userprofile');
   };
 
   return (
