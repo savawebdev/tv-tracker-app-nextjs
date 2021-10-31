@@ -1,0 +1,23 @@
+@use '../../../styles/variables.scss' as var;
+
+.show-nav {
+  width: 100%;
+  padding-block: 0.5rem;
+  display: flex;
+  justify-content: center;
+  background: var.$clr-blue;
+}
+
+.show-nav-link {
+  margin-inline: 1rem;
+  display: block;
+  color: #fff;
+  font-size: var.$fs-400;
+  font-weight: 700;
+
+  @include var.primaryTransition(all);
+
+  &:hover {
+    color: darken(#fff, 20%);
+  }
+}

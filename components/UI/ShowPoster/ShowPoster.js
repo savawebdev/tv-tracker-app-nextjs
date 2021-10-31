@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import classes from './ShowPoster.module.scss';
 
-const ShowPoster = ({ key, alt, src, width, height }) => {
+const ShowPoster = ({ key, alt, src, width, height, onClick }) => {
   return (
     <div className={classes.container}>
       <Image
@@ -12,6 +12,7 @@ const ShowPoster = ({ key, alt, src, width, height }) => {
         alt={alt}
         width={width}
         height={height}
+        onClick={onClick}
       />
     </div>
   );

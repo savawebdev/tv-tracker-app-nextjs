@@ -1,0 +1,18 @@
+@use '../../../styles/variables.scss' as var;
+
+.episodes-nav {
+  background: var.$clr-green;
+
+  & a:not(:last-child) {
+    border-right: 2px solid #fff;
+  }
+}
+
+.episodes-nav-link {
+  padding-inline: 0.5rem;
+  font-weight: 700;
+
+  &:hover {
+    background: darken(var.$clr-green, 10%);
+  }
+}
