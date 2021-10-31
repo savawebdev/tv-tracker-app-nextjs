@@ -1,9 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
-  return (
+  const router = { useRouter };
+  const [session, loading] = useSession();
+
+  const logoutHandler = async () => {
+    const data = await signOut({ redirect: false, callbackUrl: '/' });
+
+    router.push(data.url);
+  };
+
+  if (!session) {
     <nav className={classes.nav}>
       <Link href='/login'>
         <a className={classes['nav-link']}>Login</a>
@@ -11,12 +22,19 @@ const Navbar = () => {
       <Link href='/register'>
         <a className={classes['nav-link']}>Register</a>
       </Link>
-      {/* <Link href='/'>
+    </nav>;
+  }
+
+  return (
+    <nav className={classes.nav}>
+      <Link href='/'>
         <a className={classes['nav-link']}>Shows</a>
       </Link>
       <Link href='/'>
-        <a className={classes['nav-link']}>Logout</a>
-      </Link> */}
+        <a className={classes['nav-link']} onClick={logoutHandler}>
+          Logout
+        </a>
+      </Link>
     </nav>
   );
 };
