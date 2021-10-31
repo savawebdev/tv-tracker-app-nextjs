@@ -1,13 +1,23 @@
-import React, { Fragment } from 'react';
-import { useRouter } from 'next/router';
+import React, { Fragment, useState } from 'react';
 import ShowInfo from '../../components/ShowInfoPage/ShowInfo';
 import ShowNav from '../../components/ShowInfoPage/ShowNav/ShowNav';
+import ShowSeasons from '../../components/ShowInfoPage/ShowSeasons/ShowSeasons';
+import ShowEpisodes from '../../components/ShowInfoPage/ShowSeasons/ShowEpisodes/ShowEpisodes';
+import ShowCast from '../../components/ShowInfoPage/ShowCast/ShowCast';
 
 const ShowInfoPage = ({ data }) => {
+  const [tab, setTab] = useState('seasons');
+
+  const setTabHandler = (newTab) => {
+    setTab(newTab);
+  };
   return (
     <Fragment>
       <ShowInfo show={data} />
-      <ShowNav showId={data.id} />
+      <ShowNav showId={data.id} onSetTab={setTabHandler} />
+      {tab === 'seasons' && <ShowSeasons />}
+      {tab === 'episodes' && <ShowEpisodes />}
+      {tab === 'cast' && <ShowCast />}
     </Fragment>
   );
 };
