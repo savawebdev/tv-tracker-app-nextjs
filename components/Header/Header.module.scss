@@ -1,0 +1,9 @@
+@use '../../styles/variables.scss' as var;
+
+.header {
+  height: 3.75rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var.$clr-blue;
+}
