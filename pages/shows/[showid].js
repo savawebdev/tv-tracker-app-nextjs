@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import ShowInfo from '../../components/ShowInfoPage/ShowInfo';
 import ShowNav from '../../components/ShowInfoPage/ShowNav/ShowNav';
 import ShowSeasons from '../../components/ShowInfoPage/ShowSeasons/ShowSeasons';
-import ShowEpisodes from '../../components/ShowInfoPage/ShowSeasons/ShowEpisodes/ShowEpisodes';
+import ShowEpisodes from '../../components/ShowInfoPage/ShowEpisodes/ShowEpisodes';
 import ShowCast from '../../components/ShowInfoPage/ShowCast/ShowCast';
 
 const ShowInfoPage = ({ data }) => {
@@ -15,7 +15,7 @@ const ShowInfoPage = ({ data }) => {
     <Fragment>
       <ShowInfo show={data} />
       <ShowNav showId={data.id} onSetTab={setTabHandler} />
-      {tab === 'seasons' && <ShowSeasons />}
+      {tab === 'seasons' && <ShowSeasons seasons={data.seasons} />}
       {tab === 'episodes' && <ShowEpisodes />}
       {tab === 'cast' && <ShowCast />}
     </Fragment>
