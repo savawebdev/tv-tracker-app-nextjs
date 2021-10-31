@@ -17,6 +17,9 @@ const Navbar = () => {
   if (!session) {
     return (
       <nav className={classes.nav}>
+        <Link href='/shows'>
+          <a className={classes['nav-link']}>Shows</a>
+        </Link>
         <Link href='/login'>
           <a className={classes['nav-link']}>Login</a>
         </Link>
@@ -31,6 +34,9 @@ const Navbar = () => {
     <nav className={classes.nav}>
       <Link href='/shows'>
         <a className={classes['nav-link']}>Shows</a>
+      </Link>
+      <Link href='/userprofile'>
+        <a className={classes['nav-link']}>My Profile</a>
       </Link>
       <Link href='/'>
         <a className={classes['nav-link']} onClick={logoutHandler}>

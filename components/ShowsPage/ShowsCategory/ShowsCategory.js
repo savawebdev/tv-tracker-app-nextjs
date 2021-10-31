@@ -1,10 +1,14 @@
 import React from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 import classes from './ShowsCategory.module.scss';
 import { imgUrl } from '../../../lib/helpers';
 import ShowPoster from '../../UI/ShowPoster/ShowPoster';
 
 const ShowsCategory = ({ category, data }) => {
+  const router = useRouter();
+  const clickHandler = (id) => {
+    router.push(`/shows/${id}`);
+  };
   return (
     <div className={classes.category}>
       <h2>{category}</h2>
@@ -16,6 +20,7 @@ const ShowsCategory = ({ category, data }) => {
             alt={show.name}
             width={180}
             height={250}
+            onClick={() => clickHandler(show.id)}
           />
         ))}
       </div>

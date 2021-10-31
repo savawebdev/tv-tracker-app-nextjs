@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import PopularShows from '../components/HomePage/PopularShows/PopularShows';
-import CTAButton from '../components/HomePage/CTAButton/CTAButton';
 
 const HomePage = ({ data }) => {
   return (
     <Fragment>
-      <CTAButton />
       <PopularShows shows={data.results} />
     </Fragment>
   );
