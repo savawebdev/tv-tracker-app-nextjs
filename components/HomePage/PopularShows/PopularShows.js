@@ -15,7 +15,6 @@ const PopularShows = ({ shows }) => {
 
   return (
     <Fragment>
-      {!session && <CTAButton />}
       <h1>Popular Shows</h1>
       {shows && (
         <div className={classes['popular-shows']}>
@@ -32,6 +31,7 @@ const PopularShows = ({ shows }) => {
           ))}
         </div>
       )}
+      {!session && <CTAButton />}
     </Fragment>
   );
 };

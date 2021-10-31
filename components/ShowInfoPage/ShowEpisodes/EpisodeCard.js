@@ -8,6 +8,11 @@ import Card from '../../UI/Card/Card';
 const EpisodeCard = ({ episode }) => {
   const img = `${imgUrl}${episode.still_path}`;
 
+  const episodeOverview =
+    episode.overview === ''
+      ? 'No summary available for this episode'
+      : episode.overview;
+
   return (
     <Card>
       <Image
@@ -21,7 +26,7 @@ const EpisodeCard = ({ episode }) => {
         <h3>
           {episode.episode_number} - {episode.name}
         </h3>
-        <p>{episode.overview}</p>
+        <p>{episodeOverview}</p>
       </div>
     </Card>
   );
