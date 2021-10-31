@@ -1,0 +1,25 @@
+@use '../../../styles/variables.scss' as var;
+
+.popular-shows {
+  margin-block: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+
+  // The Nextjs Image component uses a <img> tag wrapped inside a <span> tag.
+  & span {
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: var.$shadow-dark;
+    @include var.primaryTransition(all);
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    & img:hover {
+      @include var.primaryTransition(all);
+      opacity: 0.7;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@use '../../../styles/variables.scss' as var;
+
+.cta-button {
+  width: 250px;
+  padding-block: 1rem;
+  margin: 1rem;
+  background: var.$clr-green;
+  border: none;
+  border-radius: 5px;
+  font-size: var.$fs-400;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var.$shadow-dark;
+  @include var.primaryTransition(background-color);
+
+  &:hover {
+    background: darken(var.$clr-green, 10%);
+  }
+}

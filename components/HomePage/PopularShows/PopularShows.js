@@ -10,7 +10,7 @@ const PopularShows = ({ shows }) => {
       {shows && (
         <div className={classes['popular-shows']}>
           {shows.map((show) => (
-            <img
+            <Image
               className={classes['show-img']}
               src={`${imgUrl}${show.poster_path}`}
               key={show.id}
