@@ -17,14 +17,6 @@ const ShowsCategory = ({ category, data }) => {
             width={180}
             height={250}
           />
-          //   <Image
-          //     className={classes['show-img']}
-          //     src={`${imgUrl}${show.poster_path}`}
-          //     key={show.id}
-          //     alt={show.name}
-          //     width={180}
-          //     height={250}
-          //   />
         ))}
       </div>
     </div>
