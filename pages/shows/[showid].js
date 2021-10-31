@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import ShowInfo from '../../components/ShowInfoPage/ShowInfo';
+import ShowNav from '../../components/ShowInfoPage/ShowNav/ShowNav';
 
 const ShowInfoPage = ({ data }) => {
   return (
     <Fragment>
-      <ShowInfo data={data} />
+      <ShowInfo show={data} />
+      <ShowNav showId={data.id} />
     </Fragment>
   );
 };
