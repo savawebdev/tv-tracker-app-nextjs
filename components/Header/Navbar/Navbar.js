@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <nav className={classes.nav}>
-      <Link href='/'>
+      <Link href='/shows'>
         <a className={classes['nav-link']}>Shows</a>
       </Link>
       <Link href='/'>
