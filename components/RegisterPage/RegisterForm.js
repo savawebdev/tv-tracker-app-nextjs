@@ -1,15 +1,45 @@
 import React, { useRef } from 'react';
+// import { registerUser } from '../../lib/auth';
 import classes from './RegisterForm.module.scss';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
 
+const registerUser = async (email, password) => {
+  const result = await fetch('/api/auth/register-user', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const data = await result.json();
+  console.log(data);
+};
+
 const RegisterForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+
+    if (password !== confirmPassword) {
+      window.alert('Passwords must match!');
+      return;
+    }
+
+    await registerUser(email, password);
+  };
+
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitHandler}>
       <h1>Create an account</h1>
       <div className={classes['form-control']}>
         <Label label='Email' htmlFor='email' />
