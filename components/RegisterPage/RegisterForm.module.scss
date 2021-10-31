@@ -1,0 +1,9 @@
+@use '../../styles/variables.scss' as var;
+
+.form {
+  padding: 1rem;
+  background: var.$clr-blue;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: var.$shadow-dark;
+}

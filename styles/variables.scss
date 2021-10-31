@@ -16,6 +16,7 @@ $fs-200: 0.875rem;
 
 // Shadows
 $shadow-dark: 2px 5px 10px lighten($clr-dark, 10%);
+$shadow-blue: 2px 5px 10px lighten($clr-blue, 10%);
 
 // Transitions
 @mixin primaryTransition($property) {

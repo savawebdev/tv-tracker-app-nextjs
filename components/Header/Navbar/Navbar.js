@@ -14,7 +14,7 @@ const Navbar = () => {
       {/* <Link href='/'>
         <a className={classes['nav-link']}>Logout</a>
       </Link> */}
-      <Link href='/'>
+      <Link href='/register'>
         <a className={classes['nav-link']}>Register</a>
       </Link>
     </nav>
