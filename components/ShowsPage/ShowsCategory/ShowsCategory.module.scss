@@ -1,0 +1,37 @@
+@use '../../../styles/variables.scss' as var;
+
+.category {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+
+  & h2 {
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+}
+
+.shows {
+  padding: 0.5rem;
+  overflow: auto;
+  white-space: nowrap;
+
+  & div {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  &::-webkit-scrollbar {
+    background: var.$clr-light-blue;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var.$clr-blue;
+    border-radius: 10px;
+
+    &:hover {
+      background: darken(var.$clr-blue, 10%);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use '../../../styles/variables.scss' as var;
+
+.container span {
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: var.$shadow-dark;
+  @include var.primaryTransition(all);
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  & img:hover {
+    @include var.primaryTransition(all);
+    opacity: 0.7;
+  }
+}
