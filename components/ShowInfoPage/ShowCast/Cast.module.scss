@@ -1,0 +1,16 @@
+@use '../../../styles/variables.scss' as var;
+
+.cast {
+  width: 70vw;
+  padding-block: 1rem;
+
+  & h2 {
+    font-weight: 400;
+  }
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}

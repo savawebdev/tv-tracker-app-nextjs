@@ -4,18 +4,18 @@
   width: auto;
   margin-block: 1rem;
   display: flex;
-  gap: 1rem;
   border: 1px solid var.$clr-blue;
   border-radius: 5px;
-  padding-right: 1rem;
 
   & h3 {
     margin-bottom: 1rem;
+    padding-inline: 1rem;
     font-size: var.$fs-400;
   }
 
   & p {
     text-align: justify;
+    padding-inline: 1rem;
     font-size: var.$fs-200;
   }
 }

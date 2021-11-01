@@ -1,0 +1,17 @@
+@use '../../../styles/variables.scss' as var;
+
+.info {
+  width: 250px;
+  padding-block: 1rem;
+
+  & h3 span {
+    display: block;
+    font-size: var.$fs-300;
+    font-weight: 400;
+  }
+
+  & p {
+    text-align: left;
+    font-style: italic;
+  }
+}
