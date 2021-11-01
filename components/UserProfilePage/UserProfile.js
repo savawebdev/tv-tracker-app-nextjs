@@ -3,9 +3,9 @@ import classes from './UserProfile.module.scss';
 
 const UserProfile = () => {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <React.Fragment>
+      <h1>Under construction</h1>
+    </React.Fragment>
   );
 };
 
