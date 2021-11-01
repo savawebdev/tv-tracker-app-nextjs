@@ -5,7 +5,7 @@ import ShowSeasons from '../../components/ShowInfoPage/ShowSeasons/ShowSeasons';
 import ShowEpisodes from '../../components/ShowInfoPage/ShowEpisodes/ShowEpisodes';
 import ShowCast from '../../components/ShowInfoPage/ShowCast/ShowCast';
 
-const ShowInfoPage = ({ data, seasons }) => {
+const ShowInfoPage = ({ data, showCast }) => {
   const [tab, setTab] = useState('seasons');
 
   const setTabHandler = (newTab) => {
@@ -19,7 +19,7 @@ const ShowInfoPage = ({ data, seasons }) => {
       {tab === 'episodes' && (
         <ShowEpisodes showId={data.id} seasons={data.seasons} />
       )}
-      {tab === 'cast' && <ShowCast />}
+      {tab === 'cast' && <ShowCast showCast={showCast.cast} />}
     </Fragment>
   );
 };
@@ -33,21 +33,27 @@ export const getServerSideProps = async (context) => {
   );
   const data = await result.json();
 
-  // Fetch Seasons
-  const seasons = [];
+  // // Fetch Seasons
+  // const seasons = [];
 
-  for (const season in data.seasons) {
-    const seasonResult = await fetch(
-      `https://api.themoviedb.org/3/tv/${data.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
-    );
-    const seasonData = await seasonResult.json();
-    seasons.push(seasonData);
-  }
+  // for (const season in data.seasons) {
+  //   const seasonResult = await fetch(
+  //     `https://api.themoviedb.org/3/tv/${data.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
+  //   );
+  //   const seasonData = await seasonResult.json();
+  //   seasons.push(seasonData);
+  // }
+
+  // Fetch Show Cast
+  const castResult = await fetch(
+    `https://api.themoviedb.org/3/tv/${data.id}/aggregate_credits?api_key=${apiKey}&language=en-US`
+  );
+  const showCast = await castResult.json();
 
   return {
     props: {
       data,
-      seasons,
+      showCast,
     },
   };
 };
