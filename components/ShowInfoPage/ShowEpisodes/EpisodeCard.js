@@ -25,6 +25,7 @@ const EpisodeCard = ({ episode }) => {
       <div className={classes['episode-info']}>
         <h3>
           {episode.episode_number} - {episode.name}
+          <span>Air Date: {episode.air_date}</span>
         </h3>
         <p>{episodeOverview}</p>
       </div>
