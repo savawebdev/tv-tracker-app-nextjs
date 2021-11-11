@@ -27,7 +27,7 @@ const ShowInfoPage = ({ showData, showCast }) => {
 
 export const getServerSideProps = async (context) => {
   const showId = context.params.showid;
-  const apiKey = process.env.TMDB_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   const showData = await fetchData(
     `https://api.themoviedb.org/3/tv/${showId}?api_key=${apiKey}&language=en-US`

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import useStore from '../../store/store';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
@@ -20,6 +21,7 @@ const registerUser = async (email, password) => {
 };
 
 const RegisterForm = () => {
+  const { loading, setLoading } = useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -37,6 +39,7 @@ const RegisterForm = () => {
       return;
     }
 
+    setLoading();
     await registerUser(email, password);
 
     const result = await signIn('credentials', {
@@ -44,7 +47,7 @@ const RegisterForm = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
-
+    setLoading();
     router.push('/userprofile');
   };
 
@@ -82,6 +85,13 @@ const RegisterForm = () => {
           required={true}
         />
       </FormControl>
+
+      {loading && (
+        <FormControl>
+          <p>Creating your account...</p>
+        </FormControl>
+      )}
+
       <FormControl>
         <Button label='Register' args={{ type: 'submit' }} color='success' />
       </FormControl>

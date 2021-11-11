@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import useStore from '../../store/store';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
@@ -8,6 +9,7 @@ import AuthForm from '../UI/Form/AuthForm';
 import FormControl from '../UI/Form/FormControl';
 
 const LoginForm = () => {
+  const { loading, setLoading } = useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -15,11 +17,13 @@ const LoginForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    setLoading();
     const result = await signIn('credentials', {
       redirect: false,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
+    setLoading();
 
     router.push('/userprofile');
   };
@@ -46,6 +50,12 @@ const LoginForm = () => {
           required={true}
         />
       </FormControl>
+
+      {loading && (
+        <FormControl>
+          <p>Logging you in...</p>
+        </FormControl>
+      )}
 
       <FormControl>
         <Button label='Login' args={{ type: 'submit' }} color='success' />
