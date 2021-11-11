@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './Loading.module.scss';
+import classes from './LoadingComponent.module.scss';
 
-const Loading = () => {
+const LoadingComponent = () => {
   return (
     <div className={classes.loading}>
       <div className={classes.dot}></div>
@@ -13,4 +13,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoadingComponent;

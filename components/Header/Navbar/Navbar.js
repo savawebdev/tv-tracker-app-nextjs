@@ -35,6 +35,9 @@ const Navbar = () => {
       <Link href='/shows'>
         <a className={classes['nav-link']}>Shows</a>
       </Link>
+      <Link href='/shows/myshows'>
+        <a className={classes['nav-link']}>My Shows</a>
+      </Link>
       <Link href='/userprofile'>
         <a className={classes['nav-link']}>My Profile</a>
       </Link>

@@ -15,9 +15,16 @@ const createAlertSlice = (set, get) => ({
     set((prev) => ({ alertMessage: newMessage })),
 });
 
+const createShowsSlice = (set, get) => ({
+  shows: [],
+  setShows: (showsArray) => set((prev) => ({ shows: showsArray })),
+  addShow: (show) => set((prev) => ({ shows: [...prev.shows, show] })),
+});
+
 const useStore = create((set, get) => ({
   ...createLoadingSlice(set, get),
   ...createAlertSlice(set, get),
+  ...createShowsSlice(set, get),
 }));
 
 export default useStore;

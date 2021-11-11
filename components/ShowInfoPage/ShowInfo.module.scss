@@ -17,6 +17,7 @@
 .info {
   width: 40vw;
   color: #fff;
+  z-index: 5;
 
   & h1 span {
     font-weight: 400;
@@ -29,4 +30,20 @@
 
 .genres {
   font-size: var.$fs-200;
+}
+
+.add-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 2rem;
+  background: none;
+  border: 1px solid var.$clr-blue;
+  border-radius: 5px;
+  color: var.$clr-blue;
+  cursor: pointer;
+  @include var.primaryTransition(all);
+
+  &:hover {
+    background: var.$clr-blue;
+    color: #fff;
+  }
 }
