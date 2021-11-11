@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { fetchData } from '../../lib/helpers';
 import Shows from '../../components/ShowsPage/Shows';
 
 const ShowsPage = ({ topRated, airingTonight, trendingShows }) => {
@@ -17,23 +18,17 @@ export const getStaticProps = async () => {
   try {
     const apiKey = process.env.TMDB_API_KEY;
 
-    // Fetch Top Rated Shows
-    const result = await fetch(
+    const topRated = await fetchData(
       `https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=en-US&page=1`
     );
-    const topRated = await result.json();
 
-    // Fetch Airing Tonight Shows
-    const airingResult = await fetch(
+    const airingTonight = await fetchData(
       `https://api.themoviedb.org/3/tv/airing_today?api_key=${apiKey}&language=en-US&page=1`
     );
-    const airingTonight = await airingResult.json();
 
-    // Fetch Trending Shows
-    const trendingResult = await fetch(
+    const trendingShows = await fetchData(
       `https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}`
     );
-    const trendingShows = await trendingResult.json();
 
     return {
       props: {
