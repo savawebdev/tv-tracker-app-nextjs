@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import classes from './RegisterForm.module.scss';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
