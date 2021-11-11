@@ -11,11 +11,19 @@ const ShowInfo = ({ show }) => {
   const genres = show.genres.map((genre) => genre.name).join(', ');
   const creators = show.created_by.map((creator) => creator.name).join(', ');
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     if (shows.find((s) => s.id === show.id)) {
       window.alert('Show already added');
       return;
     }
+
+    const result = await fetch('/api/shows/add-show', {
+      method: 'POST',
+      body: JSON.stringify({ show }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     addShow(show);
   };
