@@ -1,11 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import classes from './MyShows.module.scss';
 import useStore from '../../store/store';
-import { imgUrl } from '../../lib/helpers';
+import { imgUrl, fetchData } from '../../lib/helpers';
 import ShowPoster from '../UI/ShowPoster/ShowPoster';
 
 const MyShows = () => {
-  const { shows } = useStore();
+  const { shows, setShows } = useStore();
+
+  useEffect(() => {
+    fetchData('/api/shows/get-shows').then((res) => setShows(res.shows));
+  }, [setShows]);
 
   return (
     <Fragment>

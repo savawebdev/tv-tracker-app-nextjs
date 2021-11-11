@@ -19,6 +19,8 @@ const createShowsSlice = (set, get) => ({
   shows: [],
   setShows: (showsArray) => set((prev) => ({ shows: showsArray })),
   addShow: (show) => set((prev) => ({ shows: [...prev.shows, show] })),
+  removeShow: (id) =>
+    set((prev) => ({ shows: prev.shows.filter((show) => show.id !== id) })),
 });
 
 const useStore = create((set, get) => ({

@@ -5,15 +5,23 @@ import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
 
 const ShowInfo = ({ show }) => {
-  const { shows, addShow } = useStore();
+  const { shows, addShow, removeShow } = useStore();
 
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
   const creators = show.created_by.map((creator) => creator.name).join(', ');
+  const isShowAdded = shows.find((s) => s.id === show.id);
 
   const clickHandler = async () => {
-    if (shows.find((s) => s.id === show.id)) {
-      window.alert('Show already added');
+    if (isShowAdded) {
+      const result = await fetch('/api/shows/remove-show', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: show.id }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      removeShow(show.id);
       return;
     }
 
@@ -49,7 +57,7 @@ const ShowInfo = ({ show }) => {
         </p>
 
         <button className={classes['add-btn']} onClick={clickHandler}>
-          Add
+          {isShowAdded ? 'Remove' : 'Add'}
         </button>
       </div>
     </div>

@@ -35,15 +35,15 @@
 .add-btn {
   margin-top: 1rem;
   padding: 0.5rem 2rem;
-  background: none;
+  background: var.$clr-blue;
   border: 1px solid var.$clr-blue;
   border-radius: 5px;
-  color: var.$clr-blue;
+  color: #fff;
   cursor: pointer;
   @include var.primaryTransition(all);
 
   &:hover {
-    background: var.$clr-blue;
-    color: #fff;
+    background: none;
+    border-color: #fff;
   }
 }
