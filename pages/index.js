@@ -1,8 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { fetchData } from '../lib/helpers';
+import useStore from '../store/store';
 import PopularShows from '../components/HomePage/PopularShows/PopularShows';
 
 const HomePage = ({ data }) => {
+  const { setShows } = useStore();
+  useEffect(() => {
+    fetchData('/api/shows/get-shows').then((res) => setShows(res.shows));
+  }, [setShows]);
+
   return (
     <Fragment>
       <PopularShows shows={data.results} />
