@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
-// import { registerUser } from '../../lib/auth';
 import classes from './RegisterForm.module.scss';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
+import AuthForm from '../UI/Form/AuthForm';
+import FormControl from '../UI/Form/FormControl';
 
 const registerUser = async (email, password) => {
   const result = await fetch('/api/auth/register-user', {
@@ -49,16 +50,16 @@ const RegisterForm = () => {
   };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <AuthForm args={{ onSubmit: submitHandler }}>
       <h1>Create an account</h1>
-      <div className={classes['form-control']}>
+      <FormControl>
         <Label label='Email' htmlFor='email' />
         <Input
           args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
           required={true}
         />
-      </div>
-      <div className={classes['form-control']}>
+      </FormControl>
+      <FormControl>
         <Label label='Password' htmlFor='password' />
         <Input
           args={{
@@ -69,8 +70,8 @@ const RegisterForm = () => {
           }}
           required={true}
         />
-      </div>
-      <div className={classes['form-control']}>
+      </FormControl>
+      <FormControl>
         <Label label='Confirm password' htmlFor='confirmpassword' />
         <Input
           args={{
@@ -81,11 +82,11 @@ const RegisterForm = () => {
           }}
           required={true}
         />
-      </div>
-      <div className={classes['form-control']}>
+      </FormControl>
+      <FormControl>
         <Button label='Register' args={{ type: 'submit' }} color='success' />
-      </div>
-    </form>
+      </FormControl>
+    </AuthForm>
   );
 };
 

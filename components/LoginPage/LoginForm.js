@@ -5,6 +5,8 @@ import classes from './LoginForm.module.scss';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
+import AuthForm from '../UI/Form/AuthForm';
+import FormControl from '../UI/Form/FormControl';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -24,16 +26,16 @@ const LoginForm = () => {
   };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <AuthForm args={{ onSubmit: submitHandler }}>
       <h1>Login</h1>
-      <div className={classes['form-control']}>
+      <FormControl>
         <Label label='Email' htmlFor='email' />
         <Input
           args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
           required={true}
         />
-      </div>
-      <div className={classes['form-control']}>
+      </FormControl>
+      <FormControl>
         <Label label='Password' htmlFor='password' />
         <Input
           args={{
@@ -44,12 +46,12 @@ const LoginForm = () => {
           }}
           required={true}
         />
-      </div>
+      </FormControl>
 
-      <div className={classes['form-control']}>
+      <FormControl>
         <Button label='Login' args={{ type: 'submit' }} color='success' />
-      </div>
-    </form>
+      </FormControl>
+    </AuthForm>
   );
 };
 
