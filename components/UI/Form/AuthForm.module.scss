@@ -1,6 +1,7 @@
-@use '../../styles/variables.scss' as var;
+@use '../../../styles/variables.scss' as var;
 
 .form {
+  margin-top: 1rem;
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -13,8 +14,4 @@
   & h1 {
     font-size: var.$fs-450;
   }
-}
-
-.form-control {
-  margin-block: 0.5rem;
 }

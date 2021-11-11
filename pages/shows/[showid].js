@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from 'react';
+import { fetchData } from '../../lib/helpers';
 import ShowInfo from '../../components/ShowInfoPage/ShowInfo';
 import ShowNav from '../../components/ShowInfoPage/ShowNav/ShowNav';
 import ShowSeasons from '../../components/ShowInfoPage/ShowSeasons/ShowSeasons';
 import ShowEpisodes from '../../components/ShowInfoPage/ShowEpisodes/ShowEpisodes';
 import ShowCast from '../../components/ShowInfoPage/ShowCast/ShowCast';
 
-const ShowInfoPage = ({ data, showCast }) => {
+const ShowInfoPage = ({ showData, showCast }) => {
   const [tab, setTab] = useState('seasons');
 
   const setTabHandler = (newTab) => {
@@ -13,11 +14,11 @@ const ShowInfoPage = ({ data, showCast }) => {
   };
   return (
     <Fragment>
-      <ShowInfo show={data} />
-      <ShowNav showId={data.id} onSetTab={setTabHandler} />
-      {tab === 'seasons' && <ShowSeasons seasons={data.seasons} />}
+      <ShowInfo show={showData} />
+      <ShowNav showId={showData.id} onSetTab={setTabHandler} />
+      {tab === 'seasons' && <ShowSeasons seasons={showData.seasons} />}
       {tab === 'episodes' && (
-        <ShowEpisodes showId={data.id} seasons={data.seasons} />
+        <ShowEpisodes showId={showData.id} seasons={showData.seasons} />
       )}
       {tab === 'cast' && <ShowCast showCast={showCast.cast} />}
     </Fragment>
@@ -26,33 +27,19 @@ const ShowInfoPage = ({ data, showCast }) => {
 
 export const getServerSideProps = async (context) => {
   const showId = context.params.showid;
-  const apiKey = process.env.TMDB_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-  const result = await fetch(
+  const showData = await fetchData(
     `https://api.themoviedb.org/3/tv/${showId}?api_key=${apiKey}&language=en-US`
   );
-  const data = await result.json();
 
-  // // Fetch Seasons
-  // const seasons = [];
-
-  // for (const season in data.seasons) {
-  //   const seasonResult = await fetch(
-  //     `https://api.themoviedb.org/3/tv/${data.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
-  //   );
-  //   const seasonData = await seasonResult.json();
-  //   seasons.push(seasonData);
-  // }
-
-  // Fetch Show Cast
-  const castResult = await fetch(
-    `https://api.themoviedb.org/3/tv/${data.id}/aggregate_credits?api_key=${apiKey}&language=en-US`
+  const showCast = await fetchData(
+    `https://api.themoviedb.org/3/tv/${showData.id}/aggregate_credits?api_key=${apiKey}&language=en-US`
   );
-  const showCast = await castResult.json();
 
   return {
     props: {
-      data,
+      showData,
       showCast,
     },
   };

@@ -1,12 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, Fragment } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import classes from './LoginForm.module.scss';
+import useStore from '../../store/store';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
+import AuthForm from '../UI/Form/AuthForm';
+import FormControl from '../UI/Form/FormControl';
+import Alert from '../UI/Alert/Alert';
 
 const LoginForm = () => {
+  const { showAlert, setShowAlert, setAlertType, setAlertMessage } = useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -14,42 +18,57 @@ const LoginForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    setShowAlert();
+    setAlertType('info');
+    setAlertMessage('Logging you in, please wait...');
+
     const result = await signIn('credentials', {
       redirect: false,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
 
+    setShowAlert();
+
+    if (result.error) {
+      setAlertType('error');
+      setAlertMessage(result.error);
+      return;
+    }
+
     router.push('/userprofile');
   };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
-      <h1>Login</h1>
-      <div className={classes['form-control']}>
-        <Label label='Email' htmlFor='email' />
-        <Input
-          args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
-          required={true}
-        />
-      </div>
-      <div className={classes['form-control']}>
-        <Label label='Password' htmlFor='password' />
-        <Input
-          args={{
-            type: 'password',
-            name: 'password',
-            id: 'password',
-            ref: passwordRef,
-          }}
-          required={true}
-        />
-      </div>
+    <Fragment>
+      {showAlert && <Alert />}
+      <AuthForm args={{ onSubmit: submitHandler }}>
+        <h1>Login</h1>
+        <FormControl>
+          <Label label='Email' htmlFor='email' />
+          <Input
+            args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
+            required={true}
+          />
+        </FormControl>
+        <FormControl>
+          <Label label='Password' htmlFor='password' />
+          <Input
+            args={{
+              type: 'password',
+              name: 'password',
+              id: 'password',
+              ref: passwordRef,
+            }}
+            required={true}
+          />
+        </FormControl>
 
-      <div className={classes['form-control']}>
-        <Button label='Login' args={{ type: 'submit' }} color='success' />
-      </div>
-    </form>
+        <FormControl>
+          <Button label='Login' args={{ type: 'submit' }} color='success' />
+        </FormControl>
+      </AuthForm>
+    </Fragment>
   );
 };
 
