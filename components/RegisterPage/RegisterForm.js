@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import useStore from '../../store/store';
@@ -7,6 +7,7 @@ import Input from '../UI/Form/Input';
 import Button from '../UI/Button/Button';
 import AuthForm from '../UI/Form/AuthForm';
 import FormControl from '../UI/Form/FormControl';
+import Alert from '../UI/Alert/Alert';
 
 const registerUser = async (email, password) => {
   const result = await fetch('/api/auth/register-user', {
@@ -18,10 +19,11 @@ const registerUser = async (email, password) => {
   });
 
   const data = await result.json();
+  return data;
 };
 
 const RegisterForm = () => {
-  const { loading, setLoading } = useStore();
+  const { showAlert, setShowAlert, setAlertType, setAlertMessage } = useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -35,67 +37,81 @@ const RegisterForm = () => {
     const confirmPassword = confirmPasswordRef.current.value;
 
     if (password !== confirmPassword) {
-      window.alert('Passwords must match!');
+      setShowAlert();
+      setAlertType('error');
+      setAlertMessage('Passwords must match!');
+      setTimeout(() => {
+        setShowAlert();
+      }, 3000);
       return;
     }
 
-    setLoading();
-    await registerUser(email, password);
+    setShowAlert();
+    setAlertType('info');
+    setAlertMessage('Creating your account, please wait...');
 
+    const register = await registerUser(email, password);
+
+    setAlertMessage('Logging you in, please wait...');
     const result = await signIn('credentials', {
       redirect: false,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
-    setLoading();
+
+    setShowAlert();
+
+    if (result.error) {
+      setAlertType('error');
+      setAlertMessage(result.error);
+      return;
+    }
+
     router.push('/userprofile');
   };
 
   return (
-    <AuthForm args={{ onSubmit: submitHandler }}>
-      <h1>Create an account</h1>
-      <FormControl>
-        <Label label='Email' htmlFor='email' />
-        <Input
-          args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
-          required={true}
-        />
-      </FormControl>
-      <FormControl>
-        <Label label='Password' htmlFor='password' />
-        <Input
-          args={{
-            type: 'password',
-            name: 'password',
-            id: 'password',
-            ref: passwordRef,
-          }}
-          required={true}
-        />
-      </FormControl>
-      <FormControl>
-        <Label label='Confirm password' htmlFor='confirmpassword' />
-        <Input
-          args={{
-            type: 'password',
-            name: 'confirmpassword',
-            id: 'confirmpassword',
-            ref: confirmPasswordRef,
-          }}
-          required={true}
-        />
-      </FormControl>
-
-      {loading && (
+    <Fragment>
+      {showAlert && <Alert />}
+      <AuthForm args={{ onSubmit: submitHandler }}>
+        <h1>Create an account</h1>
         <FormControl>
-          <p>Creating your account...</p>
+          <Label label='Email' htmlFor='email' />
+          <Input
+            args={{ type: 'email', name: 'email', id: 'email', ref: emailRef }}
+            required={true}
+          />
         </FormControl>
-      )}
+        <FormControl>
+          <Label label='Password' htmlFor='password' />
+          <Input
+            args={{
+              type: 'password',
+              name: 'password',
+              id: 'password',
+              ref: passwordRef,
+            }}
+            required={true}
+          />
+        </FormControl>
+        <FormControl>
+          <Label label='Confirm password' htmlFor='confirmpassword' />
+          <Input
+            args={{
+              type: 'password',
+              name: 'confirmpassword',
+              id: 'confirmpassword',
+              ref: confirmPasswordRef,
+            }}
+            required={true}
+          />
+        </FormControl>
 
-      <FormControl>
-        <Button label='Register' args={{ type: 'submit' }} color='success' />
-      </FormControl>
-    </AuthForm>
+        <FormControl>
+          <Button label='Register' args={{ type: 'submit' }} color='success' />
+        </FormControl>
+      </AuthForm>
+    </Fragment>
   );
 };
 

@@ -6,9 +6,11 @@ const createLoadingSlice = (set, get) => ({
 });
 
 const createAlertSlice = (set, get) => ({
-  alertType: '',
+  showAlert: false,
+  alertType: 'info',
+  alertMessage: 'Please wait...',
+  setShowAlert: () => set((prev) => ({ showAlert: !prev.showAlert })),
   setAlertType: (newType) => set((prev) => ({ alertType: newType })),
-  alertMessage: '',
   setAlertMessage: (newMessage) =>
     set((prev) => ({ alertMessage: newMessage })),
 });
