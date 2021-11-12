@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
-import Link from 'next/link';
 import classes from './MyShows.module.scss';
 import useStore from '../../store/store';
 import { fetchData } from '../../lib/helpers';
+import ShowRow from './ShowRow/ShowRow';
 
 const MyShows = () => {
   const { shows, setShows } = useStore();
@@ -24,15 +24,7 @@ const MyShows = () => {
         </thead>
         <tbody>
           {shows.map((show) => (
-            <tr key={show.id}>
-              <td>
-                <Link href={`/shows/${show.id}`}>
-                  <a className={classes['show-link']}>{show.name}</a>
-                </Link>
-              </td>
-              <td>{show.status}</td>
-              <td>120/120</td>
-            </tr>
+            <ShowRow key='show.id' show={show} />
           ))}
         </tbody>
       </table>

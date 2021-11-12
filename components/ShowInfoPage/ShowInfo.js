@@ -35,7 +35,7 @@ const ShowInfo = ({ show }) => {
       seasons.push(result);
     }
 
-    const showToAdd = { ...show, seasons };
+    const showToAdd = { ...show, seasons, episodesWatched: 0 };
 
     const result = await fetch('/api/shows/add-show', {
       method: 'POST',
