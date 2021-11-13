@@ -3,9 +3,10 @@ import Image from 'next/image';
 import useStore from '../../store/store';
 import { imgUrl, fetchData } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
+import LoadingSpinner from '../UI/Loading/LoadingSpinner';
 
 const ShowInfo = ({ show }) => {
-  const { shows, addShow, removeShow } = useStore();
+  const { loading, setLoading, shows, addShow, removeShow } = useStore();
 
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
@@ -13,7 +14,9 @@ const ShowInfo = ({ show }) => {
   const isShowAdded = shows.find((s) => s.id === show.id);
 
   const clickHandler = async () => {
+    setLoading();
     if (isShowAdded) {
+      removeShow(show.id);
       const result = await fetch('/api/shows/remove-show', {
         method: 'DELETE',
         body: JSON.stringify({ id: show.id }),
@@ -21,7 +24,7 @@ const ShowInfo = ({ show }) => {
           'Content-Type': 'application/json',
         },
       });
-      removeShow(show.id);
+      setLoading();
       return;
     }
 
@@ -37,6 +40,8 @@ const ShowInfo = ({ show }) => {
 
     const showToAdd = { ...show, seasons, episodesWatched: 0 };
 
+    addShow(showToAdd);
+
     const result = await fetch('/api/shows/add-show', {
       method: 'POST',
       body: JSON.stringify({ show: showToAdd }),
@@ -44,8 +49,7 @@ const ShowInfo = ({ show }) => {
         'Content-Type': 'application/json',
       },
     });
-
-    addShow(showToAdd);
+    setLoading();
   };
 
   let img;
@@ -69,9 +73,18 @@ const ShowInfo = ({ show }) => {
           Created By: <strong>{creators}</strong>
         </p>
 
-        <button className={classes['add-btn']} onClick={clickHandler}>
-          {isShowAdded ? 'Remove' : 'Add'}
-        </button>
+        {loading ? (
+          <button
+            className={classes['add-btn']}
+            onClick={clickHandler}
+            disabled>
+            <LoadingSpinner color='white' size='small' />
+          </button>
+        ) : (
+          <button className={classes['add-btn']} onClick={clickHandler}>
+            {isShowAdded ? 'Remove' : 'Add'}
+          </button>
+        )}
       </div>
     </div>
   );
