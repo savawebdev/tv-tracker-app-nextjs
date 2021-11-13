@@ -10,4 +10,9 @@
   color: var.$clr-blue;
   text-decoration: underline;
   font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    color: darken(var.$clr-blue, 10%);
+  }
 }
