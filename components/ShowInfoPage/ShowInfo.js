@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import useStore from '../../store/store';
-import { imgUrl } from '../../lib/helpers';
+import { imgUrl, fetchData } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
 
 const ShowInfo = ({ show }) => {
@@ -25,15 +25,27 @@ const ShowInfo = ({ show }) => {
       return;
     }
 
+    const seasons = [];
+
+    for (const season of show.seasons) {
+      const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+      const result = await fetchData(
+        `https://api.themoviedb.org/3/tv/${show.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
+      );
+      seasons.push(result);
+    }
+
+    const showToAdd = { ...show, seasons, episodesWatched: 0 };
+
     const result = await fetch('/api/shows/add-show', {
       method: 'POST',
-      body: JSON.stringify({ show }),
+      body: JSON.stringify({ show: showToAdd }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    addShow(show);
+    addShow(showToAdd);
   };
 
   return (

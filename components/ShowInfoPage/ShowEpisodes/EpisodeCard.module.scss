@@ -17,3 +17,29 @@
     font-style: italic;
   }
 }
+
+.watched,
+.not-watched {
+  margin: 0.5rem 0 0 0.5rem;
+  padding-block: 0.2rem;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.not-watched {
+  background: var.$clr-light-blue;
+  color: var.$clr-blue;
+}
+
+.watched {
+  background: var.$clr-green;
+  color: #fff;
+}
+
+.watched-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var.$clr-blue;
+  text-decoration: underline;
+}

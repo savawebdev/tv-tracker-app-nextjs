@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import useSWR from 'swr';
+
 import EpisodesNav from './EpisodesNav';
 import Episodes from './Episodes';
 
@@ -15,13 +16,10 @@ const ShowEpisodes = ({ seasons, showId }) => {
     fetcher
   );
 
-  console.log(data);
-
   const setSeasonNumberHandler = (string) => {
     setSeasonNumber(string);
   };
 
-  console.log(data);
   return (
     <Fragment>
       <div>
