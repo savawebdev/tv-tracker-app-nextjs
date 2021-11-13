@@ -1,0 +1,18 @@
+@use '../../../styles/variables.scss' as var;
+
+.btn-container {
+  margin-top: 1rem;
+}
+
+.mark-season-btn {
+  background: none;
+  border: none;
+  color: var.$clr-blue;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    color: darken(var.$clr-blue, 10%);
+  }
+}

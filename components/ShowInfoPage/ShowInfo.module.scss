@@ -46,4 +46,8 @@
     background: none;
     border-color: #fff;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }

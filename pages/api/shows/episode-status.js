@@ -1,6 +1,14 @@
 import { connectToDatabase } from '../../../lib/db';
 import { getSession } from 'next-auth/client';
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 const handler = async (req, res) => {
   try {
     const session = await getSession({ req });

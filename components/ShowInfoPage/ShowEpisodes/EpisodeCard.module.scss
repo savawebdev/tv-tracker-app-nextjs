@@ -42,4 +42,8 @@
   cursor: pointer;
   color: var.$clr-blue;
   text-decoration: underline;
+
+  &:hover {
+    color: darken(var.$clr-blue, 10%);
+  }
 }
