@@ -48,13 +48,14 @@ const ShowInfo = ({ show }) => {
     addShow(showToAdd);
   };
 
+  let img;
+  if (show.backdrop_path) {
+    img = `${imgUrl}${show.backdrop_path}`;
+  } else img = 'https://via.placeholder.com/250x150/eaf6ff?text=+';
+
   return (
     <div className={classes.backdrop}>
-      <Image
-        src={`${imgUrl}${show.backdrop_path}`}
-        alt={show.name}
-        layout='fill'
-      />
+      <Image src={img} alt={show.name} layout='fill' />
 
       <div className={classes.info}>
         <h1>

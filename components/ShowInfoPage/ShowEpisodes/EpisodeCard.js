@@ -8,7 +8,6 @@ import classes from './EpisodeCard.module.scss';
 import Card from '../../UI/Card/Card';
 
 const EpisodeCard = ({ episode, seasonNumber }) => {
-  const img = `${imgUrl}${episode.still_path}`;
   const { shows, setShows } = useStore();
   const router = useRouter();
 
@@ -25,6 +24,13 @@ const EpisodeCard = ({ episode, seasonNumber }) => {
     episode.overview === ''
       ? 'No summary available for this episode'
       : episode.overview;
+
+  let img;
+  if (episode.still_path) {
+    img = `${imgUrl}${episode.still_path}`;
+  } else
+    img =
+      'https://via.placeholder.com/250x150/eaf6ff/058ed9?text=TV+Tracker+App';
 
   const clickHandler = async () => {
     if (isEpisodeWatched) {

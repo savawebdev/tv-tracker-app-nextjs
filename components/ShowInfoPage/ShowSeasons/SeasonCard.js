@@ -11,10 +11,17 @@ const SeasonCard = ({ season }) => {
       ? 'No summary available for this season'
       : season.overview;
 
+  let img;
+  if (season.poster_path) {
+    img = `${imgUrl}${season.poster_path}`;
+  } else
+    img =
+      'https://via.placeholder.com/180x250/eaf6ff/058ed9?text=TV+Tracker+App';
+
   return (
     <Card>
       <Image
-        src={`${imgUrl}${season.poster_path}`}
+        src={img}
         alt=''
         className={classes['season-img']}
         width={180}
