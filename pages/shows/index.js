@@ -14,7 +14,7 @@ const ShowsPage = ({ topRated, airingTonight, trendingShows }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
