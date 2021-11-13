@@ -65,7 +65,7 @@ const EpisodeCard = ({ episode, seasonNumber }) => {
           <span>Air Date: {episode.air_date}</span>
         </h3>
         <p>{episodeOverview}</p>
-        {show && (
+        {show && seasonNumber !== 0 && (
           <Fragment>
             <p
               className={
