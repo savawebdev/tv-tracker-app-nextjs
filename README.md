@@ -6,3 +6,6 @@ The app to track the TV shows you watch or find new shows.
 
 - Nextjs
 - MongoDB
+- NextAuth
+- Sass
+- Zustand

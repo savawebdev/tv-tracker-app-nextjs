@@ -4,8 +4,8 @@
   width: auto;
   margin-block: 1rem;
   display: flex;
-  border: 1px solid var.$clr-blue;
   border-radius: 5px;
+  box-shadow: var.$shadow-blue;
 
   & h3 {
     margin-bottom: 1rem;
