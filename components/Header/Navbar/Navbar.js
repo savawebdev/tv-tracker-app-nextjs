@@ -32,6 +32,9 @@ const Navbar = () => {
 
   return (
     <nav className={classes.nav}>
+      <Link href='/shows/search'>
+        <a className={classes['nav-link']}>Search</a>
+      </Link>
       <Link href='/shows'>
         <a className={classes['nav-link']}>Shows</a>
       </Link>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { imgUrl } from '../../../lib/helpers';
 import classes from './PopularShows.module.scss';
 import CTAButton from '../CTAButton/CTAButton';
+import ShowPoster from '../../UI/ShowPoster/ShowPoster';
 
 const PopularShows = ({ shows }) => {
   const [session, loading] = useSession();
@@ -19,13 +20,9 @@ const PopularShows = ({ shows }) => {
       {shows && (
         <div className={classes['popular-shows']}>
           {shows.map((show) => (
-            <Image
-              className={classes['show-img']}
-              src={`${imgUrl}${show.poster_path}`}
+            <ShowPoster
               key={show.id}
-              alt={show.name}
-              width={180}
-              height={250}
+              show={show}
               onClick={() => clickHandler(show.id)}
             />
           ))}
