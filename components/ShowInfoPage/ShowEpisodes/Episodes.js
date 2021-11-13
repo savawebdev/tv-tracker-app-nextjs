@@ -1,4 +1,5 @@
 import React from 'react';
+
 import EpisodeCard from './EpisodeCard';
 
 const Episodes = ({ season }) => {
@@ -8,7 +9,11 @@ const Episodes = ({ season }) => {
   return (
     <div>
       {season.episodes.map((episode) => (
-        <EpisodeCard key={episode.id} episode={episode} />
+        <EpisodeCard
+          key={episode.id}
+          episode={episode}
+          seasonNumber={season.season_number}
+        />
       ))}
     </div>
   );

@@ -45,7 +45,7 @@ const ShowInfo = ({ show }) => {
       },
     });
 
-    addShow(show);
+    addShow(showToAdd);
   };
 
   return (

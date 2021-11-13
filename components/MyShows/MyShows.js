@@ -24,7 +24,7 @@ const MyShows = () => {
         </thead>
         <tbody>
           {shows.map((show) => (
-            <ShowRow key='show.id' show={show} />
+            <ShowRow key={show.id} show={show} />
           ))}
         </tbody>
       </table>
