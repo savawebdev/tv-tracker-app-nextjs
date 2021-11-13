@@ -3,11 +3,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { imgUrl } from '../../lib/helpers';
 import classes from './SearchShows.module.scss';
+import ShowPoster from '../UI/ShowPoster/ShowPoster';
 
 const SearchShows = () => {
   const [filteredShows, setFilteredShows] = useState([]);
   const router = useRouter();
 
+  // Searching Shows Logic
   const changeFilterHandler = async (e) => {
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
     e.preventDefault();
@@ -24,6 +26,7 @@ const SearchShows = () => {
     setFilteredShows(data.results);
   };
 
+  // Programmatic Link To Show page
   const clickHandler = (id) => {
     router.push(`/shows/${id}`);
   };
@@ -46,13 +49,9 @@ const SearchShows = () => {
       {filteredShows && (
         <div className={classes['shows']}>
           {filteredShows.map((show) => (
-            <Image
-              className={classes['show-img']}
-              src={`${imgUrl}${show.poster_path}`}
+            <ShowPoster
               key={show.id}
-              alt={show.name}
-              width={180}
-              height={250}
+              show={show}
               onClick={() => clickHandler(show.id)}
             />
           ))}

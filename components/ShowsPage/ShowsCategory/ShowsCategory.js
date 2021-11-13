@@ -15,11 +15,9 @@ const ShowsCategory = ({ category, data }) => {
       <div className={classes.shows}>
         {data.map((show) => (
           <ShowPoster
-            src={`${imgUrl}${show.poster_path}`}
             key={show.id}
             alt={show.name}
-            width={180}
-            height={250}
+            show={show}
             onClick={() => clickHandler(show.id)}
           />
         ))}
