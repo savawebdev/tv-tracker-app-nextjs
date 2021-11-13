@@ -9,7 +9,7 @@ const Navbar = () => {
   const [session, loading] = useSession();
 
   const logoutHandler = async () => {
-    const data = await signOut({ redirect: false, callbackUrl: '/' });
+    const data = await signOut({ redirect: false, callbackUrl: '/home' });
 
     router.push(data.url);
   };
