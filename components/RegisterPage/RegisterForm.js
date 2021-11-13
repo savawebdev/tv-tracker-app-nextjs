@@ -23,7 +23,8 @@ const registerUser = async (email, password) => {
 };
 
 const RegisterForm = () => {
-  const { showAlert, setShowAlert, setAlertType, setAlertMessage } = useStore();
+  const { setShows, showAlert, setShowAlert, setAlertType, setAlertMessage } =
+    useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -58,6 +59,8 @@ const RegisterForm = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
+
+    setShows([]);
 
     setShowAlert();
 
