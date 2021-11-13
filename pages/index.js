@@ -16,7 +16,7 @@ const HomePage = ({ data }) => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   const data = await fetchData(

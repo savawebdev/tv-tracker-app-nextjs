@@ -1,6 +1,7 @@
 import React, { useRef, Fragment } from 'react';
 import { signIn } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import { fetchData } from '../../lib/helpers';
 import useStore from '../../store/store';
 import Label from '../UI/Form/Label';
 import Input from '../UI/Form/Input';
@@ -10,7 +11,8 @@ import FormControl from '../UI/Form/FormControl';
 import Alert from '../UI/Alert/Alert';
 
 const LoginForm = () => {
-  const { showAlert, setShowAlert, setAlertType, setAlertMessage } = useStore();
+  const { setShows, showAlert, setShowAlert, setAlertType, setAlertMessage } =
+    useStore();
   const router = useRouter();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -27,6 +29,9 @@ const LoginForm = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     });
+
+    const data = await fetchData('/api/shows/get-shows');
+    setShows(data.shows);
 
     setShowAlert();
 
