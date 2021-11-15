@@ -8,6 +8,7 @@ import Button from '../UI/Button/Button';
 import AuthForm from '../UI/Form/AuthForm';
 import FormControl from '../UI/Form/FormControl';
 import Alert from '../UI/Alert/Alert';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const registerUser = async (email, password) => {
   const result = await fetch('/api/auth/register-user', {
@@ -77,7 +78,7 @@ const RegisterForm = () => {
     <Fragment>
       {showAlert && <Alert />}
       <AuthForm args={{ onSubmit: submitHandler }}>
-        <h1>Create an account</h1>
+        <PageTitle label='Register' />
         <FormControl>
           <Label label='Email' htmlFor='email' />
           <Input

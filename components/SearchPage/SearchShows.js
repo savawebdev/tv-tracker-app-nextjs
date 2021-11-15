@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import classes from './SearchShows.module.scss';
 import ShowPoster from '../UI/ShowPoster/ShowPoster';
 import ShowsContainer from '../UI/ShowsContainer/ShowsContainer';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const SearchShows = () => {
   const [filteredShows, setFilteredShows] = useState([]);
@@ -32,7 +33,7 @@ const SearchShows = () => {
 
   return (
     <Fragment>
-      <h1>Search Shows</h1>
+      <PageTitle label='Search Shows' />
 
       <div>
         <input

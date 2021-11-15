@@ -5,6 +5,7 @@ import classes from './PopularShows.module.scss';
 import CTAButton from '../CTAButton/CTAButton';
 import ShowPoster from '../../UI/ShowPoster/ShowPoster';
 import ShowsContainer from '../../UI/ShowsContainer/ShowsContainer';
+import PageTitle from '../../UI/PageTitle/PageTitle';
 
 const PopularShows = ({ shows }) => {
   const [session, loading] = useSession();
@@ -15,7 +16,7 @@ const PopularShows = ({ shows }) => {
 
   return (
     <Fragment>
-      <h1>Popular Shows</h1>
+      <PageTitle label='Popular Shows' />
       {shows && (
         <ShowsContainer>
           {shows.map((show) => (

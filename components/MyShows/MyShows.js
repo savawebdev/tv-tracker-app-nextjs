@@ -3,6 +3,7 @@ import classes from './MyShows.module.scss';
 import useStore from '../../store/store';
 import { fetchData } from '../../lib/helpers';
 import ShowRow from './ShowRow/ShowRow';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const MyShows = () => {
   const { shows, setShows } = useStore();
@@ -13,7 +14,7 @@ const MyShows = () => {
 
   return (
     <Fragment>
-      <h1>My Shows</h1>
+      <PageTitle label='My Shows' />
       <table className={classes.shows}>
         <thead>
           <tr>
