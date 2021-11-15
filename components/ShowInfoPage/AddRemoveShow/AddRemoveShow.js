@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import useStore from '../../../../store/store';
-import { fetchData } from '../../../../lib/helpers';
+import useStore from '../../../store/store';
+import { fetchData } from '../../../lib/helpers';
 import classes from './AddRemoveShow.module.scss';
-import Button from '../../../UI/Button/Button';
-import LoadingSpinner from '../../../UI/Loading/LoadingSpinner';
+import Button from '../../UI/Button/Button';
+import LoadingSpinner from '../../UI/Loading/LoadingSpinner';
 
 const AddRemoveShow = ({ show }) => {
   const { shows, addShow, removeShow } = useStore();

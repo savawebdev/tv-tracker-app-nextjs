@@ -2,8 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
-
-import AddRemoveShow from './ShowSeasons/AddRemoveShow/AddRemoveShow';
+import AddRemoveShow from './AddRemoveShow/AddRemoveShow';
 
 const ShowInfo = ({ show }) => {
   const firstAirYear = show.first_air_date.slice(0, 4);
