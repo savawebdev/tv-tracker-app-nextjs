@@ -1,10 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
+import { useSession } from 'next-auth/client';
 import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
 import AddRemoveShow from './AddRemoveShow/AddRemoveShow';
 
 const ShowInfo = ({ show }) => {
+  const [session, loading] = useSession();
+
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
   const creators = show.created_by.map((creator) => creator.name).join(', ');
@@ -30,7 +33,7 @@ const ShowInfo = ({ show }) => {
           Created By: <strong>{creators}</strong>
         </p>
 
-        <AddRemoveShow show={show} />
+        {session && <AddRemoveShow show={show} />}
       </div>
     </div>
   );
