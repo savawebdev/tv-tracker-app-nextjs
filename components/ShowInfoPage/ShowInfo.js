@@ -1,58 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import useStore from '../../store/store';
-import { imgUrl, fetchData } from '../../lib/helpers';
+import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
-import LoadingSpinner from '../UI/Loading/LoadingSpinner';
-import Button from '../UI/Button/Button';
+
+import AddRemoveShow from './ShowSeasons/AddRemoveShow/AddRemoveShow';
 
 const ShowInfo = ({ show }) => {
-  const { shows, addShow, removeShow } = useStore();
-  const [loading, setLoading] = useState(false);
-
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
   const creators = show.created_by.map((creator) => creator.name).join(', ');
-  const isShowAdded = shows.find((s) => s.id === show.id);
-
-  const clickHandler = async () => {
-    setLoading(true);
-    if (isShowAdded) {
-      removeShow(show.id);
-      const result = await fetch('/api/shows/remove-show', {
-        method: 'DELETE',
-        body: JSON.stringify({ id: show.id }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      setLoading(false);
-      return;
-    }
-
-    const seasons = [];
-
-    for (const season of show.seasons) {
-      const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-      const result = await fetchData(
-        `https://api.themoviedb.org/3/tv/${show.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
-      );
-      seasons.push(result);
-    }
-
-    const showToAdd = { ...show, seasons, episodesWatched: 0 };
-
-    addShow(showToAdd);
-
-    const result = await fetch('/api/shows/add-show', {
-      method: 'POST',
-      body: JSON.stringify({ show: showToAdd }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    setLoading(false);
-  };
 
   let img;
   if (show.backdrop_path) {
@@ -75,24 +31,7 @@ const ShowInfo = ({ show }) => {
           Created By: <strong>{creators}</strong>
         </p>
 
-        <div className={classes.actions}>
-          {loading ? (
-            <Button
-              label={<LoadingSpinner color='white' size='small' />}
-              color='blue'
-              size='small'
-              args={{ onClick: clickHandler }}
-              disabled={true}
-            />
-          ) : (
-            <Button
-              label={isShowAdded ? 'Remove' : 'Add'}
-              color='blue'
-              size='small'
-              args={{ onClick: clickHandler }}
-            />
-          )}
-        </div>
+        <AddRemoveShow show={show} />
       </div>
     </div>
   );
