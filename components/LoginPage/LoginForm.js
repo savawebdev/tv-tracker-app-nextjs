@@ -71,7 +71,12 @@ const LoginForm = () => {
         </FormControl>
 
         <FormControl>
-          <Button label='Login' args={{ type: 'submit' }} color='success' />
+          <Button
+            label='Login'
+            args={{ type: 'submit' }}
+            color='green'
+            size='small'
+          />
         </FormControl>
       </AuthForm>
     </Fragment>

@@ -1,9 +1,22 @@
 import React from 'react';
 import classes from './Button.module.scss';
 
-const Button = ({ label, args, color }) => {
+const Button = ({ label, args, color, size, disabled }) => {
+  if (disabled) {
+    return (
+      <button
+        className={`${classes.button} ${classes[color]} ${classes[size]}`}
+        {...args}
+        disabled>
+        {label}
+      </button>
+    );
+  }
+
   return (
-    <button className={`${classes.button} ${classes[color]}`} {...args}>
+    <button
+      className={`${classes.button} ${classes[color]} ${classes[size]}`}
+      {...args}>
       {label}
     </button>
   );

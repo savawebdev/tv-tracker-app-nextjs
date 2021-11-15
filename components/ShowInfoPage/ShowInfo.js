@@ -4,6 +4,7 @@ import useStore from '../../store/store';
 import { imgUrl, fetchData } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
 import LoadingSpinner from '../UI/Loading/LoadingSpinner';
+import Button from '../UI/Button/Button';
 
 const ShowInfo = ({ show }) => {
   const { loading, setLoading, shows, addShow, removeShow } = useStore();
@@ -73,18 +74,24 @@ const ShowInfo = ({ show }) => {
           Created By: <strong>{creators}</strong>
         </p>
 
-        {loading ? (
-          <button
-            className={classes['add-btn']}
-            onClick={clickHandler}
-            disabled>
-            <LoadingSpinner color='white' size='small' />
-          </button>
-        ) : (
-          <button className={classes['add-btn']} onClick={clickHandler}>
-            {isShowAdded ? 'Remove' : 'Add'}
-          </button>
-        )}
+        <div className={classes.actions}>
+          {loading ? (
+            <Button
+              label={<LoadingSpinner color='white' size='small' />}
+              color='blue'
+              size='small'
+              args={{ onClick: clickHandler }}
+              disabled={true}
+            />
+          ) : (
+            <Button
+              label={isShowAdded ? 'Remove' : 'Add'}
+              color='blue'
+              size='small'
+              args={{ onClick: clickHandler }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

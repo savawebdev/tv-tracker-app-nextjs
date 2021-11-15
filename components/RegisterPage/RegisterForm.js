@@ -112,7 +112,12 @@ const RegisterForm = () => {
         </FormControl>
 
         <FormControl>
-          <Button label='Register' args={{ type: 'submit' }} color='success' />
+          <Button
+            label='Register'
+            args={{ type: 'submit' }}
+            color='green'
+            size='small'
+          />
         </FormControl>
       </AuthForm>
     </Fragment>

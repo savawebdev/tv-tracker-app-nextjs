@@ -1,27 +1,40 @@
 @use '../../../styles/variables.scss' as var;
 
 .button {
-  width: 6rem;
   padding-block: 0.6rem;
   border: none;
   border-radius: 5px;
   font-weight: 700;
   cursor: pointer;
   @include var.primaryTransition(background-color);
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
-.primary {
+.blue {
   background: var.$clr-blue;
+  color: #fff;
 
   &:hover {
     background: darken(var.$clr-blue, 10%);
   }
 }
 
-.success {
+.green {
   background: var.$clr-green;
 
   &:hover {
     background: darken(var.$clr-green, 10%);
   }
+}
+
+.small {
+  width: 6rem;
+  height: 2.2rem;
+}
+
+.large {
+  width: 15.625rem;
 }
