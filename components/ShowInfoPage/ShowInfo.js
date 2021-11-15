@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import useStore from '../../store/store';
 import { imgUrl, fetchData } from '../../lib/helpers';
@@ -7,7 +7,8 @@ import LoadingSpinner from '../UI/Loading/LoadingSpinner';
 import Button from '../UI/Button/Button';
 
 const ShowInfo = ({ show }) => {
-  const { loading, setLoading, shows, addShow, removeShow } = useStore();
+  const { shows, addShow, removeShow } = useStore();
+  const [loading, setLoading] = useState(false);
 
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
@@ -15,7 +16,7 @@ const ShowInfo = ({ show }) => {
   const isShowAdded = shows.find((s) => s.id === show.id);
 
   const clickHandler = async () => {
-    setLoading();
+    setLoading(true);
     if (isShowAdded) {
       removeShow(show.id);
       const result = await fetch('/api/shows/remove-show', {
@@ -25,7 +26,7 @@ const ShowInfo = ({ show }) => {
           'Content-Type': 'application/json',
         },
       });
-      setLoading();
+      setLoading(false);
       return;
     }
 
@@ -50,7 +51,7 @@ const ShowInfo = ({ show }) => {
         'Content-Type': 'application/json',
       },
     });
-    setLoading();
+    setLoading(false);
   };
 
   let img;
