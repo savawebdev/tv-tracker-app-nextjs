@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useStore from '../../../store/store';
 import { fetchData } from '../../../lib/helpers';
 import classes from './AddRemoveShow.module.scss';
@@ -6,13 +6,12 @@ import Button from '../../UI/Button/Button';
 import LoadingSpinner from '../../UI/Loading/LoadingSpinner';
 
 const AddRemoveShow = ({ show }) => {
-  const { shows, addShow, removeShow } = useStore();
-  const [loading, setLoading] = useState(false);
+  const { loading, setLoading, shows, addShow, removeShow } = useStore();
 
   const isShowAdded = shows.find((s) => s.id === show.id);
 
   const clickHandler = async () => {
-    setLoading(true);
+    setLoading();
     if (isShowAdded) {
       removeShow(show.id);
       const result = await fetch('/api/shows/remove-show', {
@@ -22,7 +21,7 @@ const AddRemoveShow = ({ show }) => {
           'Content-Type': 'application/json',
         },
       });
-      setLoading(false);
+      setLoading();
       return;
     }
 
@@ -47,7 +46,7 @@ const AddRemoveShow = ({ show }) => {
         'Content-Type': 'application/json',
       },
     });
-    setLoading(false);
+    setLoading();
   };
 
   return (

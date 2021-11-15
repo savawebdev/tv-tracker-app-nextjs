@@ -7,10 +7,6 @@
   font-weight: 700;
   cursor: pointer;
   @include var.primaryTransition(background-color);
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 }
 
 .blue {
@@ -37,4 +33,13 @@
 
 .large {
   width: 15.625rem;
+}
+
+.disabled {
+  cursor: not-allowed;
+  background: lighten(gray, 10%);
+
+  &:hover {
+    background: lighten(gray, 10%);
+  }
 }

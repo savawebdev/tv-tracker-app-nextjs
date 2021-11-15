@@ -5,7 +5,9 @@ const Button = ({ label, args, color, size, disabled }) => {
   if (disabled) {
     return (
       <button
-        className={`${classes.button} ${classes[color]} ${classes[size]}`}
+        className={`${classes.button} ${classes[color]} ${classes[size]} ${
+          disabled && classes.disabled
+        }`}
         {...args}
         disabled>
         {label}
