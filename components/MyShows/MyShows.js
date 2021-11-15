@@ -10,7 +10,7 @@ const MyShows = () => {
   useEffect(() => {
     fetchData('/api/shows/get-shows').then((res) => setShows(res.shows));
   }, [setShows]);
-  console.log(shows);
+
   return (
     <Fragment>
       <h1>My Shows</h1>
