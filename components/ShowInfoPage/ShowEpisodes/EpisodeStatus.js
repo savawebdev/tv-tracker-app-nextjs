@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import useStore from '../../../store/store';
 import classes from './EpisodeStatus.module.scss';

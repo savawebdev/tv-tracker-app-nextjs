@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useStore from '../../../store/store';
@@ -9,7 +9,7 @@ import Card from '../../UI/Card/Card';
 import EpisodeStatus from './EpisodeStatus';
 
 const EpisodeCard = ({ episode, seasonNumber }) => {
-  const { shows, setShows } = useStore();
+  const { shows } = useStore();
   const router = useRouter();
 
   const show = shows.find((s) => s.id == router.query.showid);
