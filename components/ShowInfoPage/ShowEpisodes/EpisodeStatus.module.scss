@@ -1,0 +1,25 @@
+@use '../../../styles/variables.scss' as var;
+
+.watched,
+.not-watched {
+  margin: 0.5rem 0 0 0.5rem;
+  padding-block: 0.2rem;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+  @include var.primaryTransition(opacity);
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.not-watched {
+  background: var.$clr-light-blue;
+  color: var.$clr-blue;
+}
+
+.watched {
+  background: var.$clr-green;
+  color: #fff;
+}

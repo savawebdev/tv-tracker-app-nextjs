@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
-import { imgUrl } from '../../../lib/helpers';
 import classes from './PopularShows.module.scss';
 import CTAButton from '../CTAButton/CTAButton';
 import ShowPoster from '../../UI/ShowPoster/ShowPoster';
+import ShowsContainer from '../../UI/ShowsContainer/ShowsContainer';
+import PageTitle from '../../UI/PageTitle/PageTitle';
 
 const PopularShows = ({ shows }) => {
   const [session, loading] = useSession();
@@ -16,9 +16,9 @@ const PopularShows = ({ shows }) => {
 
   return (
     <Fragment>
-      <h1>Popular Shows</h1>
+      <PageTitle label='Popular Shows' />
       {shows && (
-        <div className={classes['popular-shows']}>
+        <ShowsContainer>
           {shows.map((show) => (
             <ShowPoster
               key={show.id}
@@ -26,7 +26,7 @@ const PopularShows = ({ shows }) => {
               onClick={() => clickHandler(show.id)}
             />
           ))}
-        </div>
+        </ShowsContainer>
       )}
       {!session && <CTAButton />}
     </Fragment>

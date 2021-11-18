@@ -3,6 +3,7 @@ import classes from './MyShows.module.scss';
 import useStore from '../../store/store';
 import { fetchData } from '../../lib/helpers';
 import ShowRow from './ShowRow/ShowRow';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const MyShows = () => {
   const { shows, setShows } = useStore();
@@ -10,10 +11,10 @@ const MyShows = () => {
   useEffect(() => {
     fetchData('/api/shows/get-shows').then((res) => setShows(res.shows));
   }, [setShows]);
-  console.log(shows);
+
   return (
     <Fragment>
-      <h1>My Shows</h1>
+      <PageTitle label='My Shows' />
       <table className={classes.shows}>
         <thead>
           <tr>

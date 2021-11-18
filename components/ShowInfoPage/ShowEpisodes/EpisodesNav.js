@@ -6,7 +6,6 @@ import classes from './EpisodesNav.module.scss';
 const EpisodesNav = ({ seasons, onSetSeasonNumber }) => {
   const router = useRouter();
   const showId = router.query.showid;
-  //   console.log(seasons);
 
   return (
     <nav className={classes['episodes-nav']}>

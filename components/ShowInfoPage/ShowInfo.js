@@ -1,56 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import useStore from '../../store/store';
-import { imgUrl, fetchData } from '../../lib/helpers';
+import { useSession } from 'next-auth/client';
+import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
-import LoadingSpinner from '../UI/Loading/LoadingSpinner';
+import AddRemoveShow from './AddRemoveShow/AddRemoveShow';
 
 const ShowInfo = ({ show }) => {
-  const { loading, setLoading, shows, addShow, removeShow } = useStore();
+  const [session, loading] = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (session && !loading) {
+      setIsLoggedIn(true);
+    }
+  }, [session, loading]);
 
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');
   const creators = show.created_by.map((creator) => creator.name).join(', ');
-  const isShowAdded = shows.find((s) => s.id === show.id);
-
-  const clickHandler = async () => {
-    setLoading();
-    if (isShowAdded) {
-      removeShow(show.id);
-      const result = await fetch('/api/shows/remove-show', {
-        method: 'DELETE',
-        body: JSON.stringify({ id: show.id }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      setLoading();
-      return;
-    }
-
-    const seasons = [];
-
-    for (const season of show.seasons) {
-      const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-      const result = await fetchData(
-        `https://api.themoviedb.org/3/tv/${show.id}/season/${season.season_number}?api_key=${apiKey}&language=en-US`
-      );
-      seasons.push(result);
-    }
-
-    const showToAdd = { ...show, seasons, episodesWatched: 0 };
-
-    addShow(showToAdd);
-
-    const result = await fetch('/api/shows/add-show', {
-      method: 'POST',
-      body: JSON.stringify({ show: showToAdd }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    setLoading();
-  };
 
   let img;
   if (show.backdrop_path) {
@@ -73,18 +40,7 @@ const ShowInfo = ({ show }) => {
           Created By: <strong>{creators}</strong>
         </p>
 
-        {loading ? (
-          <button
-            className={classes['add-btn']}
-            onClick={clickHandler}
-            disabled>
-            <LoadingSpinner color='white' size='small' />
-          </button>
-        ) : (
-          <button className={classes['add-btn']} onClick={clickHandler}>
-            {isShowAdded ? 'Remove' : 'Add'}
-          </button>
-        )}
+        {isLoggedIn && <AddRemoveShow show={show} />}
       </div>
     </div>
   );

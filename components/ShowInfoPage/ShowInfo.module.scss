@@ -32,22 +32,6 @@
   font-size: var.$fs-200;
 }
 
-.add-btn {
+.actions {
   margin-top: 1rem;
-  padding: 0.5rem 2rem;
-  background: var.$clr-blue;
-  border: 1px solid var.$clr-blue;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  @include var.primaryTransition(all);
-
-  &:hover {
-    background: none;
-    border-color: #fff;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 }

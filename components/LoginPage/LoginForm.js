@@ -9,6 +9,7 @@ import Button from '../UI/Button/Button';
 import AuthForm from '../UI/Form/AuthForm';
 import FormControl from '../UI/Form/FormControl';
 import Alert from '../UI/Alert/Alert';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const LoginForm = () => {
   const { setShows, showAlert, setShowAlert, setAlertType, setAlertMessage } =
@@ -48,7 +49,7 @@ const LoginForm = () => {
     <Fragment>
       {showAlert && <Alert />}
       <AuthForm args={{ onSubmit: submitHandler }}>
-        <h1>Login</h1>
+        <PageTitle label='Login' />
         <FormControl>
           <Label label='Email' htmlFor='email' />
           <Input
@@ -70,7 +71,12 @@ const LoginForm = () => {
         </FormControl>
 
         <FormControl>
-          <Button label='Login' args={{ type: 'submit' }} color='success' />
+          <Button
+            label='Login'
+            args={{ type: 'submit' }}
+            color='green'
+            size='small'
+          />
         </FormControl>
       </AuthForm>
     </Fragment>

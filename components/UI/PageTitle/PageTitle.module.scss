@@ -1,0 +1,5 @@
+@use '../../../styles/variables.scss' as var;
+
+.page-title {
+  font-size: var.$fs-500;
+}

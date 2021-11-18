@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { imgUrl } from '../../lib/helpers';
 import classes from './SearchShows.module.scss';
 import ShowPoster from '../UI/ShowPoster/ShowPoster';
+import ShowsContainer from '../UI/ShowsContainer/ShowsContainer';
+import PageTitle from '../UI/PageTitle/PageTitle';
 
 const SearchShows = () => {
   const [filteredShows, setFilteredShows] = useState([]);
@@ -33,7 +33,7 @@ const SearchShows = () => {
 
   return (
     <Fragment>
-      <h1>Search Shows</h1>
+      <PageTitle label='Search Shows' />
 
       <div>
         <input
@@ -47,7 +47,7 @@ const SearchShows = () => {
       </div>
 
       {filteredShows && (
-        <div className={classes['shows']}>
+        <ShowsContainer>
           {filteredShows.map((show) => (
             <ShowPoster
               key={show.id}
@@ -55,7 +55,7 @@ const SearchShows = () => {
               onClick={() => clickHandler(show.id)}
             />
           ))}
-        </div>
+        </ShowsContainer>
       )}
     </Fragment>
   );
