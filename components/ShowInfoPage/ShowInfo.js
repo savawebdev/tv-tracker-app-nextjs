@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import { imgUrl } from '../../lib/helpers';
 import classes from './ShowInfo.module.scss';
 import AddRemoveShow from './AddRemoveShow/AddRemoveShow';
 
 const ShowInfo = ({ show }) => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (session && !loading) {
+    if (session && status === 'authenticated') {
       setIsLoggedIn(true);
     }
-  }, [session, loading]);
+  }, [session, status]);
 
   const firstAirYear = show.first_air_date.slice(0, 4);
   const genres = show.genres.map((genre) => genre.name).join(', ');

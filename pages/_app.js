@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import useStore from '../store/store';
 import { fetchData } from '../lib/helpers';
-import { Provider, getSession } from 'next-auth/client';
+import { SessionProvider, getSession } from 'next-auth/react';
 import '../styles/globals.scss';
 import Layout from '../components/Layout/Layout';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const { setShows, setLoading } = useStore();
 
   useEffect(() => {
@@ -15,11 +15,11 @@ function MyApp({ Component, pageProps }) {
   }, [setShows, setLoading]);
 
   return (
-    <Provider>
+    <SessionProvider session={session}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </Provider>
+    </SessionProvider>
   );
 }
 

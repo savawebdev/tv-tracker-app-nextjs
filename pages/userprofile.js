@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import UserProfile from '../components/UserProfilePage/UserProfile';
 
 const UserProfilePage = () => {
