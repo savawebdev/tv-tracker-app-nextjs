@@ -12,7 +12,7 @@ const EpisodeCard = ({ episode, seasonNumber }) => {
   const { shows } = useStore();
   const router = useRouter();
 
-  const show = shows.find((s) => s.id == router.query.showid);
+  const show = (shows || []).find((s) => s.id == router.query.showid);
 
   const episodeOverview =
     episode.overview === ''

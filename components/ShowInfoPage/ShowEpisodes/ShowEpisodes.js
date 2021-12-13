@@ -23,7 +23,7 @@ const ShowEpisodes = ({ seasons, showId }) => {
     setSeasonNumber(string);
   };
 
-  const show = shows.find((s) => s.id === showId);
+  const show = (shows || []).find((s) => s.id === showId);
 
   return (
     <Fragment>
