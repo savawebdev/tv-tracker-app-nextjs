@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import useStore from '../store/store';
 import { fetchData } from '../lib/helpers';
-import { Provider, getSession } from 'next-auth/client';
+import { SessionProvider, getSession } from 'next-auth/react';
+import Head from 'next/head';
 import '../styles/globals.scss';
 import Layout from '../components/Layout/Layout';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const { setShows, setLoading } = useStore();
 
   useEffect(() => {
@@ -15,11 +16,15 @@ function MyApp({ Component, pageProps }) {
   }, [setShows, setLoading]);
 
   return (
-    <Provider>
+    <SessionProvider session={session}>
+      <Head>
+        <title>TV Tracker App</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </Provider>
+    </SessionProvider>
   );
 }
 

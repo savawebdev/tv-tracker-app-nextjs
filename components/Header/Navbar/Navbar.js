@@ -1,20 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
   const router = useRouter();
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
 
   const logoutHandler = async () => {
-    const data = await signOut({ redirect: false, callbackUrl: '/home' });
+    const data = await signOut({ redirect: false, callbackUrl: '/' });
 
     router.push(data.url);
   };
 
-  if (!session) {
+  if (status !== 'authenticated') {
     return (
       <nav className={classes.nav}>
         <Link href='/shows'>

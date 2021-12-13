@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import RegisterForm from '../components/RegisterPage/RegisterForm';
 
 const RegisterPage = () => {

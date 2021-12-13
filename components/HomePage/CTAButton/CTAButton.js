@@ -1,19 +1,20 @@
 import React from 'react';
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import classes from './CTAButton.module.scss';
 
 const CTAButton = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const ctaHandler = () => {
-    if (session) {
+    if (status === 'authenticated') {
       router.push('/shows');
     } else {
       router.push('/login');
     }
   };
+
   return (
     <button className={classes['cta-button']} onClick={ctaHandler}>
       Start Tracking!

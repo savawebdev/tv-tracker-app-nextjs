@@ -1,5 +1,5 @@
 import { connectToDatabase } from '../../../lib/db';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 
 export const config = {
   api: {
